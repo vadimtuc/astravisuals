@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "ru.astravisual.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ClientPlayerInteractionManagerMixin",
+    "GameRendererMixin",
+    "InGameHudMixin",
+    "MouseMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

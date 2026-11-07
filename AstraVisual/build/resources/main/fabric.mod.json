@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "astravisual",
+  "version": "1.0.0",
+  "name": "AstraVisual",
+  "description": "A clean client-side visual PvP client: HUD modules, hit markers, custom crosshair and a fully draggable HUD editor.",
+  "authors": [
+    "vadi"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/astravisual/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "ru.astravisual.AstraVisualClient"
+    ]
+  },
+  "mixins": [
+    "astravisual.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
