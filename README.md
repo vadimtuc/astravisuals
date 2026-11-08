@@ -122,24 +122,6 @@ config/astravisual.json
 - Только клиент: не конфликтует с серверными плагинами и другими клиентскими модами.
 - Если другой мод тоже заменяет прицел или HUD, порядок отрисовки может отличаться.
 
----
-
-## Структура проекта
-
-```
-src/main/java/ru/astravisual/
-├── AstraVisualClient.java        # точка входа, keybind, события
-├── config/ConfigManager.java    # JSON-конфиг
-├── gui/ClickGuiScreen.java      # главное меню
-├── gui/HudEditorScreen.java     # редактор HUD
-├── hud/HudManager.java          # якоря, масштаб, отрисовка
-├── module/                      # HUD- и визуальные модули
-├── mixin/                       # хуки ввода, урона, прицела
-└── util/                        # рендер, цвета, счётчики
-```
-
----
-
 ## Лицензия
 
 MIT — см. [LICENSE](LICENSE).
