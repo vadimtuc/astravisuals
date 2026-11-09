@@ -1,6 +1,6 @@
 # AstraVisual
 
-Клиентский визуальный мод для **Minecraft 1.21.1 (Fabric)** с HUD-элементами, кастомным прицелом, индикаторами попаданий и полноценным редактором HUD.
+Клиентский визуальный мод для **Minecraft 1.21.1 (Fabric)** с HUD-элементами, кастомным прицелом, индикаторами попаданий, частицами и полноценным редактором HUD.
 
 > **Только косметика.** AstraVisual не содержит ESP, wallhack, killaura, X-Ray и других читов. Мод работает на стороне клиента, не отправляет серверу никаких дополнительных пакетов и не даёт игрового преимущества — только улучшает визуальную часть интерфейса.
 
@@ -29,14 +29,20 @@
 | **Hit Marker** | Вспышка прицела при попадании по сущности |
 | **Crosshair** | Кастомный прицел: `DOT`, `CROSS`, `CIRCLE`, с реакцией на перезарядку атаки |
 | **No Hurt Cam** | Убирает наклон камеры при получении урона (по умолчанию выключен) |
+| **Hit Particles** | Всплеск частиц в точке попадания по сущности |
+| **Aura Particles** | Частицы, вращающиеся вокруг игрока |
 
 ### Меню и настройки
 - Открытие меню — **Right Shift** (`R-SHIFT`). Клавишу можно переназначить в `Настройки → Управление → AstraVisual`.
 - Интерфейс меню сейчас на английском, файл перевода находится в `assets/astravisual/lang/`.
-- Три вкладки: **HUD**, **Visual**, **Settings**.
+- Четыре вкладки: **HUD**, **Visual**, **Particles**, **Settings**.
 - Включение/выключение модулей кликом по строке.
 - Ползунки: **HUD Scale** (0.75×–1.5×), **Panel Opacity** (30–100 %), **Crosshair Size** (0.5×–2×).
 - Переключение стиля прицела кнопкой **Crosshair Style**.
+- Вкладка **Particles** настраивает оба эффекта частиц:
+  - **Hit Particles** — стиль (`ORB` / `STAR`), цвет, количество (1–40), размер, скорость;
+  - **Aura Particles** — стиль, цвет, радиус (0.5×–2.5×), плотность (0.1×–2×), размер, скорость.
+  - Цвета: `PURPLE`, `CYAN`, `PINK`, `GOLD`, `WHITE`, `RAINBOW` (переливается).
 - Кнопка **Edit HUD** открывает редактор: элементы можно перетаскивать мышью, позиции сохраняются автоматически.
 - **Reset HUD** / **Reset positions** возвращают элементы на стандартные места.
 - `ESC` закрывает меню (и возвращает из редактора HUD в меню).
@@ -109,7 +115,18 @@ config/astravisual.json
     "hudScale": 1.0,
     "panelOpacity": 0.85,
     "crosshairSize": 1.0,
-    "crosshairStyle": "CROSS"
+    "crosshairStyle": "CROSS",
+    "hitParticleStyle": "ORB",
+    "hitParticleColor": "PURPLE",
+    "hitParticleCount": 16.0,
+    "hitParticleSize": 1.0,
+    "hitParticleSpeed": 1.0,
+    "auraParticleStyle": "STAR",
+    "auraParticleColor": "CYAN",
+    "auraParticleRadius": 0.9,
+    "auraParticleDensity": 0.9,
+    "auraParticleSize": 1.0,
+    "auraParticleSpeed": 1.0
   }
 }
 ```
@@ -121,6 +138,26 @@ config/astravisual.json
 - Minecraft **1.21.1**, Fabric Loader **0.16.14+**, Fabric API.
 - Только клиент: не конфликтует с серверными плагинами и другими клиентскими модами.
 - Если другой мод тоже заменяет прицел или HUD, порядок отрисовки может отличаться.
+
+---
+
+## Структура проекта
+
+```
+src/main/java/ru/astravisual/
+├── AstraVisualClient.java        # клиентская точка входа, keybind, события
+├── AstraVisualCommon.java        # общая точка входа, регистрация частиц
+├── config/ConfigManager.java     # JSON-конфиг
+├── gui/ClickGuiScreen.java       # главное меню (HUD / Visual / Particles / Settings)
+├── gui/HudEditorScreen.java      # редактор HUD
+├── hud/HudManager.java           # якоря, масштаб, отрисовка
+├── module/                       # HUD-, визуальные модули и модули частиц
+├── particle/                     # кастомные частицы, спавнер, регистрация
+├── mixin/                        # хуки ввода, урона, прицела
+└── util/                         # рендер, цвета, счётчики
+```
+
+---
 
 ## Лицензия
 
